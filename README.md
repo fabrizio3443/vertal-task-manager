@@ -8,7 +8,7 @@ Dewit is a FOSS (Free and Open Source Software) task management orchestration to
 ![PocketBase](https://img.shields.io/badge/PocketBase-%23000000.svg?style=flat&logo=PocketBase&logoColor=white)
 ![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)
 
-(https://www.gnu.org/licenses/agpl-3.0)
+https://www.gnu.org/licenses/agpl-3.0
 
 ## Features
 
