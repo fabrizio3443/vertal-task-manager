@@ -8,8 +8,6 @@ Dewit is a FOSS (Free and Open Source Software) task management orchestration to
 ![PocketBase](https://img.shields.io/badge/PocketBase-%23000000.svg?style=flat&logo=PocketBase&logoColor=white)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-https://opensource.org/licenses/Apache-2.0
-
 ## Features
 
 - **Privacy First:** Data never leaves your network. 
