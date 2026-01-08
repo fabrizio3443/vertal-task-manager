@@ -1,12 +1,3 @@
-/*
- * Dewit - A high-performance, self-hosted task manager.
- * Copyright (C) 2026 Fabrizio.dev
- * * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- */
-
 // This is a basic Flutter widget test.
 //
 // To perform an interaction with a widget in your test, use the WidgetTester
