@@ -1,8 +1,8 @@
-# Dewit
+# Vertal
 
 > **A high-performance, self-hosted task manager for privacy-conscious teams.**
 
-Dewit is a FOSS (Free and Open Source Software) task management orchestration tool built with **Flutter** and **PocketBase**. It is designed for teams and individuals who need to manage tasks either locally or across internal networks without the hassle of relying on third-party cloud providers.
+Vertal is a FOSS (Free and Open Source Software) task management orchestration tool built with **Flutter** and **PocketBase**. It is designed for teams and individuals who need to manage tasks either locally or across internal networks without the hassle of relying on third-party cloud providers.
 
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=flat&logo=Flutter&logoColor=white)
 ![PocketBase](https://img.shields.io/badge/PocketBase-%23000000.svg?style=flat&logo=PocketBase&logoColor=white)
@@ -38,4 +38,4 @@ flutter run
 
 ## License
 
-Distributed under the AGPL-3.0 License. See [LICENSE](LICENSE) for more information.
+Distributed under the Apache 2.0 License. See [LICENSE](LICENSE) for more information.
