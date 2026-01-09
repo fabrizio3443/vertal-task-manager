@@ -1,11 +1,11 @@
 # Overview
 
-Dewit is a Free and Open Source task manager. it's designed to be fast, efficient, and to allow either teams or individuals to manage their tasks with ease.
+Vertal is a Free and Open Source task manager. it's designed to be fast, efficient, and to allow either teams or individuals to manage their tasks with ease.
 
 ## Features
 
 1. [Individual usage](docs/features/individual_usage.md)
-**Zero-setup required.** Every user can download Dewit and instantly start managing tasks.
+**Zero-setup required.** Every user can download Vertal and instantly start managing tasks.
 - **Local-First:** If a user does not need collaboration, self-hosting is completely optional.
 - **Offline:** All data is stored and cached in an encrypted SQLite database on the local device.
 
