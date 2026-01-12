@@ -1,7 +1,8 @@
 # Overview
 
-Vertal is a Free and Open Source task manager. it's designed to be fast, efficient, and to allow either teams or individuals to manage their tasks with ease.
+Vertal is a Free and Open Source task manager. it's designed to be fast, efficient, bridging the gap between individual privacy and group management.
 
+By leveraging a self-hosted architecture, Vertal serves as the ideal tool for leaders who need to assign and track team progress without compromise. It ensures that whether you are working alone or managing a squad, you never have to surrender your data to a third-party cloud.
 ## Features
 
 1. [Individual usage](docs/features/individual_usage.md)
