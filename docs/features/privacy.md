@@ -71,7 +71,7 @@ And the most important: it's inspectable and auditable.
 
 #### SQLite
 
-SQLite is an open source C-language library that implements a small, fast, self-contained, high-reliability, fully featured, SQL database engine (sqlite organization).
+"SQLite is an open source C-language library that implements a small, fast, self-contained, high-reliability, fully featured, SQL database engine." (Sqlite Official Project Description)
 
 It lacks:
 
@@ -86,6 +86,46 @@ And it's a good fit because:
 
 Being an embedded database engine technology makes it the perfect choice for this privacy-focused project.
 
+#### PocketBase
+
+"PocketBase is an open source backend consisting of embedded database (SQLite) with realtime subscriptions, built-in auth management, convenient dashboard UI and simple REST-ish API. It can be used both as Go framework and as standalone application." (PocketBase Official Project Description).
+
+PocketBase compiles into a single binary (Go), and no cloud service is operated by it; it also has no mandatory external dependencies, telemetry or analytics by default, or automatic check updates.
+
+The purpose of PocketBase in this project is to allow the user for self-hosting task sharing and syncing with a team without having to rely on cloud providers. PocketBase is not a service, but a software the user runs.
+
+It's behavior works like this:
+
+- Listens on a network interface
+
+- Responds to incoming requests
+
+- Does not initiate outbound connections by itself
+
+So we are talking about a passive tool for networking communication, not active.
+
+There are, however, some mistakes that could risk the user's privacy in case of misconfiguration:
+
+1. Exposed ports
+
+2. Weak auth rules
+
+3. Public collections
+
+This can be avoided if the users follow good practices when setting up their self hosted environments.
+
+#### Docker
+
+Docker is a Free and Open Source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is packaged into the source code files of the project to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
+
+In the following project, Docker is only used for deploying the server image that the self-hosted server operator can later run on a machine for development or deployment. 
+
+*Important Note:* It's the user's responsibility to trust an operator's instance, because it could've been modified.
+
+#### Cryptography/Auth
+
+
+
 ### Risks to avoid during development
 
 Flutter contains functions that invoke libraries from Google's official servers (google_fonts packages). Using these packages are a threat to our privacy model, since they require to automatically fetch the packages over the internet. In order to avoid this, all fonts will be manually curated, downloaded and packaged within the app in order to avoid the need to establish a connection with Google's servers. 
@@ -95,3 +135,7 @@ Flutter contains functions that invoke libraries from Google's official servers 
 Early build branches might include testing versions for auditing purposes which are **NOT** recommended for end users, as they might contain tools that could make use of non-privacy friendly components. The results of these audits will reflect which tools are appropriate for release candidates, and under which configurations/conditions.
 
 The conditions and steps that every audit process will need to follow might be added in another document, in order to give a clear set of tools and instructions for volunteers that want to contribute to the app's development.
+
+## About this document
+
+This document describes the privacy guarantees of the Vertal client. These guarantees apply to released versions of the application. Any change affecting these guarantees will be documented and reflected in the application version.
