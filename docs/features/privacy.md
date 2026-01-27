@@ -61,9 +61,9 @@ dart --disable-analytics
 
 #### Dart
 
-Dart is an open source, client-optimized programming language developed and stewarded by Google. It's core libraries are open source too. It's the primary language being used in the project, in order to easily mantain it as a cross-platform tool. 
+Dart is an open source, client-optimized programming language developed and stewarded by Google. It's core libraries are open source too. It's the primary language being used in the project, in order to easily maintain it as a cross-platform tool. 
 
-Dart does not run as a background service, nor does it dials any server by default. It's not made in a way to emit network traffic independently of app code.
+Dart does not run as a background service, nor does it initiates network connections by default. It's not made in a way to emit network traffic independently of app code.
 
 To answer it clearly: it cannot communicate with other services using the internet unless it's explicitly ordered to do so by the developer. 
 
@@ -80,9 +80,9 @@ It lacks:
 
 And it's a good fit because:
 
-- It operates on local files only
-- Stores files in a secure way
-- Allows for encrypted data storage
+- Operates on local files only
+- Does not initiate network connections
+- Can be combined with encryption layers at the application or platform level
 
 Being an embedded database engine technology makes it the perfect choice for this privacy-focused project.
 
@@ -116,15 +116,51 @@ This can be avoided if the users follow good practices when setting up their sel
 
 #### Docker
 
-Docker is a Free and Open Source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is packaged into the source code files of the project to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
+Docker is a Free and Open Source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is to facilitate deployment, by packaging into the source code files of the project to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
 
-In the following project, Docker is only used for deploying the server image that the self-hosted server operator can later run on a machine for development or deployment. 
+In the following project, Docker is only used for deploying the server image that the self-hosted server operator can later run on a machine for development or deployment.
 
-*Important Note:* It's the user's responsibility to trust an operator's instance, because it could've been modified.
+Vertal provides an official backend image configured to operate without telemetry or unsolicited outbound network traffic at the application level.
+
+
+Talking about the Docker engine itself (for contributors):
+
+**The Docker Engine does not violate contributor privacy by default.
+Please note that the Docker engine IS NOT the same as Docker Desktop.**
+
+*Important Note:* It's the user's responsibility to trust an operator's instance, because it could've been modified. The official Vertal backend image is within the project’s integrity guarantees, while its runtime environment remains operator-controlled.
 
 #### Cryptography/Auth
 
+Cryptography is used in this project as a supporting security mechanism to help protect user data and reduce reliance on centralized identity systems. It is not treated as a complete security solution by itself.
 
+User data may be stored locally on the device (via SQLite) and, optionally, on a self-hosted server. While both storage locations are under user control, neither local storage nor self-hosting is inherently secure by default. Cryptography is therefore applied to reduce risk, not to eliminate it.
+
+It is important to understand that cryptography minimizes exposure but does not guarantee absolute security. Private keys can be compromised through device compromise, malware, physical access, or improper handling. For this reason, users are responsible for keeping their devices and environments secure.
+
+##### Purpose of cryptography in this project
+
+In this project, cryptography is used to:
+
+- Provide a local authentication mechanism
+
+- Establish a key-based identity for optional synchronization
+
+- Allow verification of authorship and ownership of shared data
+
+- Avoid passwords entirely, reducing credential leakage risks
+
+##### Authentication model
+
+Authentication in this project does not rely on third-party identity providers (such as Google, Apple, or similar services), nor does it involve traditional username-and-password accounts.
+
+Instead, identity is derived from locally generated cryptographic keys. These keys are created on the user’s device and never leave the device by default. Authentication is only performed when the user explicitly enables features that require it (such as synchronization or collaboration).
+
+Tradeoffs and limitations
+
+Because cryptographic identity is tied to a locally stored private key, loss of that key may result in irreversible loss of access to associated data. Changing devices, reinstalling the application, or losing backups can therefore lead to permanent data loss if no recovery mechanism is in place.
+
+This tradeoff is a deliberate design consideration, prioritizing privacy and decentralization over convenience. Alternative workflows (such as opt-in key backup or multi-device access mechanisms) may be explored in the future, but no recovery guarantees are currently provided.
 
 ### Risks to avoid during development
 
