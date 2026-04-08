@@ -9,7 +9,9 @@ Vertal is a FOSS (Free and Open Source Software) task management orchestration t
 ![SQLite](https://img.shields.io/badge/SQLite-%2307405E.svg?style=flat&logo=sqlite&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-%232496ED.svg?style=flat&logo=docker&logoColor=white)
-![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)]
+
+(https://opensource.org/licenses/Apache-2.0)
 
 ## Features
 
