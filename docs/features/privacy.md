@@ -2,7 +2,7 @@
 
 This app is 100% Free and Open Source Software. It's built by a privacy advocate for privacy advocates. **NO data is collected by the developer**, and all tasks marked as private never leave the device.
 
-The app uses third-party technologies for development and optional self-hosted backend functionality, such as PocketBase. **These technologies are configured by this project, to the extent reasonably possible and verifiable, to operate without telemetry, analytics, or unsolicited network access**, according to documented privacy guidelines and audit results. Some upstream tools enable convenience features (such as update checks or analytics) by default; **Vertal explicitly disables or avoids these behaviors as part of its privacy baseline**. Server data is fully controlled by the user.
+The app uses third-party technologies for development and optional self-hosted backend functionality, such as PostgreSQL. **These technologies are configured by this project, to the extent reasonably possible and verifiable, to operate without telemetry, analytics, or unsolicited network access**, according to documented privacy guidelines and audit results. Some upstream tools enable convenience features (such as update checks or analytics) by default; **Vertal explicitly disables or avoids these behaviors as part of its privacy baseline**. Server data is fully controlled by the user.
 
 ## Our definition of privacy
 
@@ -24,12 +24,12 @@ In order to keep track of every technology used and whether or not they eventual
 
 |Technology         |Purpose                     |Network Access   | Telemetry |Network Trigger             |Notes                                     |
 |-------------------|----------------------------|-----------------|-----------|----------------------------|------------------------------------------|
-|`Flutter`          |Cross Platform UI framework |No (Runtime)     |No         |None                        |Used purely for app logic                 |
-|`Dart`             |Application Language        |No (Runtime)     |No         |None                        |                                          |
-|`SQLite`           |Local Storage               |No               |No         |None                        |Encrypted; Source of truth                |
-|`PocketBase`       |Optional Sync Backend       |Yes (self-hosted)|No         |User-initiated sync         |Stores shared tasks; fully user-controlled|
-|`Docker`           |Backend Deployment          |No (Runtime)     |No         |Not applicable for the user |Used for reproducible self-hosting        |
-|`Cryptography/auth`|Passwordless authentication |No               |No         |None                        |Private keys never leave the device       |
+|`Flutter`          |Cross Platform UI framework |No (Runtime)     |No         |N/A                         |Used purely for app logic                 |
+|`Dart`             |Application Language        |No (Runtime)     |No         |N/A                         |                                          |
+|`SQLite`           |Local Storage               |No               |No         |N/A                         |Encrypted; Source of truth                |
+|`PostgreSQL`       |Optional Sync Backend       |Yes (self-hosted)|No         |N/A (responds to API only)  |Stores shared tasks; fully user-controlled|
+|`Docker`           |Backend Deployment          |No (Runtime)     |No         |N/A (for the user)          |Used for reproducible self-hosting        |
+|`Cryptography/auth`|Passwordless authentication |No               |No         |N/A                        |Private keys never leave the device       |
 
 
 **Important Note**: *As the development progresses, more dependencies could be added to this list. In case that any of these tools changes its privacy policy, please open a ticket on the project's repository "issues" section.*
@@ -86,33 +86,11 @@ And it's a good fit because:
 
 Being an embedded database engine technology makes it the perfect choice for this privacy-focused project.
 
-#### PocketBase
+#### PostgreSQL
 
-"PocketBase is an open source backend consisting of embedded database (SQLite) with realtime subscriptions, built-in auth management, convenient dashboard UI and simple REST-ish API. It can be used both as Go framework and as standalone application." (PocketBase Official Project Description).
+PostgreSQL is a free and open source object-relational database system. This engine is used to store information. For this project, its purpose is to store tasks assigned in the self hosted, collaborative environment.
 
-PocketBase compiles into a single binary (Go), and no cloud service is operated by it; it also has no mandatory external dependencies, telemetry or analytics by default, or automatic check updates.
-
-The purpose of PocketBase in this project is to allow the user for self-hosting task sharing and syncing with a team without having to rely on cloud providers. PocketBase is not a service, but a software the user runs.
-
-It's behavior works like this:
-
-- Listens on a network interface
-
-- Responds to incoming requests
-
-- Does not initiate outbound connections by itself
-
-So we are talking about a passive tool for networking communication, not active.
-
-There are, however, some mistakes that could risk the user's privacy in case of misconfiguration:
-
-1. Exposed ports
-
-2. Weak auth rules
-
-3. Public collections
-
-This can be avoided if the users follow good practices when setting up their self hosted environments.
+PostgreSQL has zero built-in telemetry, usage analytics, or "phone home"  mechanisms. It is a passive listener tool, so it doesn't trigger network actions by itself, only listen for API calls. Because it is a network-capable database, the privacy of its data depends 100% on the server operator; by following good practices, the database should remain safe from intruders.
 
 #### Docker
 
