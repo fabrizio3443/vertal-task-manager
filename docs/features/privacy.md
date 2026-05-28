@@ -1,14 +1,16 @@
 # Privacy
 
-This app is 100% Free and Open Source Software. It's built by a privacy advocate for privacy advocates. **NO data is collected by the developer**, and all tasks marked as private never leave the device.
+This app is 100% Free and Open Source Software, and it's built for privacy advocates. **The application is designed so that the developer DOESN'T receive user data from app usage**, and all tasks marked as private are designed to remain local to the device, and are not transmitted by the application.
 
 The app uses third-party technologies for development and optional self-hosted backend functionality, such as PostgreSQL. **These technologies are configured by this project, to the extent reasonably possible and verifiable, to operate without telemetry, analytics, or unsolicited network access**, according to documented privacy guidelines and audit results. Some upstream tools enable convenience features (such as update checks or analytics) by default; **Vertal explicitly disables or avoids these behaviors as part of its privacy baseline**. Server data is fully controlled by the user.
+
+Note: This document focuses on runtime privacy guarantees affecting end users and self-hosted operators.
 
 ## Our definition of privacy
 
 For Vertal, "privacy" means autonomy.
 
-A component is considered privacy-compliant only if it emits **zero network traffic unless explicitly initiated by a user action for a clearly defined purpose**.
+A component is considered privacy-compliant only if it **avoids unsolicited network traffic unless explicitly initiated by a user action for a clearly defined purpose**.
 
 This includes disabling:
 
@@ -40,9 +42,9 @@ The following section will cover a brief explanation of every technology listed 
 
 #### Flutter
 
-Flutter is an open source, built-time framework being used in order to generate the structure of the project. Even though for Developers it does have components that trigger telemetry and analytics by default, this isn't a risk for the user, since once packaged, it becomes part of a compiled artifact, and not a third-party service or running engine.
+Flutter is an open source, application framework being used in order to generate the structure of the project. Even though for Developers it does have components that trigger telemetry and analytics by default, this isn't a risk for the user, since once packaged, it becomes part of a compiled artifact, and not a third-party service or running engine.
 
-For the user Flutter does not:
+For the user, Flutter does not:
 
 - initiate network traffic
 
@@ -61,13 +63,11 @@ dart --disable-analytics
 
 #### Dart
 
-Dart is an open source, client-optimized programming language developed and stewarded by Google. It's core libraries are open source too. It's the primary language being used in the project, in order to easily maintain it as a cross-platform tool. 
+Dart is an open source, client-optimized programming language developed and stewarded by Google. Its core libraries are open source too. It's the primary language being used in the project, in order to easily maintain it as a cross-platform tool. 
 
-Dart does not run as a background service, nor does it initiates network connections by default. It's not made in a way to emit network traffic independently of app code.
+Dart does not run as a background service, nor does it initiate network connections by default. It's not made in a way to emit network traffic independently of app code.
 
-To answer it clearly: it cannot communicate with other services using the internet unless it's explicitly ordered to do so by the developer. 
-
-And the most important: it's inspectable and auditable.
+To answer it clearly: it cannot communicate with other services using the internet unless it's explicitly ordered to do so by the developer, and it's inspectable and auditable.
 
 #### SQLite
 
@@ -90,11 +90,11 @@ Being an embedded database engine technology makes it the perfect choice for thi
 
 PostgreSQL is a free and open source object-relational database system. This engine is used to store information. For this project, its purpose is to store tasks assigned in the self hosted, collaborative environment.
 
-PostgreSQL has zero built-in telemetry, usage analytics, or "phone home"  mechanisms. It is a passive listener tool, so it doesn't trigger network actions by itself, only listen for API calls. Because it is a network-capable database, the privacy of its data depends 100% on the server operator; by following good practices, the database should remain safe from intruders.
+PostgreSQL has no built-in telemetry, usage analytics, or "phone home" mechanisms by default. It is a passive listener tool, so it doesn't trigger network actions by itself, only listens for API calls. It's supposed to be executed with the provided docker configuration so that it avoids unexpected behavior. It will, however, save logs in the server in a way that gives the operator enough information about problems while running. Because it is a network-capable database, the privacy of its data depends on the server operator; by following good practices, the database should remain safe from intruders.
 
 #### Docker
 
-Docker is a Free and Open Source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is to facilitate deployment, by packaging into the source code files of the project to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
+Docker is a Free and Open Source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is to facilitate deployment, by packaging the backend environment into reproducible containers to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
 
 In the following project, Docker is only used for deploying the server image that the self-hosted server operator can later run on a machine for development or deployment.
 
@@ -134,7 +134,7 @@ Authentication in this project does not rely on third-party identity providers (
 
 Instead, identity is derived from locally generated cryptographic keys. These keys are created on the user’s device and never leave the device by default. Authentication is only performed when the user explicitly enables features that require it (such as synchronization or collaboration).
 
-Tradeoffs and limitations
+##### Tradeoffs and limitations
 
 Because cryptographic identity is tied to a locally stored private key, loss of that key may result in irreversible loss of access to associated data. Changing devices, reinstalling the application, or losing backups can therefore lead to permanent data loss if no recovery mechanism is in place.
 
