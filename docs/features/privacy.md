@@ -19,6 +19,32 @@ This includes disabling:
 - Usage analytics
 - Dynamic asset fetching (e.g. fonts, images, etc.)
 
+It's also important to state that, even though open source software isn't privacy-compliant by default, it's the defacto format for the development tools in this project, since open source gives us a better capacity to audit and configure them so that they can be as privacy friendly as possible.
+
+## Threat Model
+
+In this section, we will cover the different threats that Vertal tries to protect the user against, and also the ones it cannot protect the user against.
+
+* Vertal has the capacity to protect against:
+
+- telemetry collection
+- unsolicited outbound traffic
+- third party tracking
+- centralized analytics
+
+**(*) Vertal protects against app level threats, not OS level threats.**
+
+Vertal doesn't protect neither the user nor the operator against:
+
+- malware
+- compromised devices
+- malicious operators
+- insecure backups
+- physical access attacks
+- OS-level compromise
+- network-based attacks
+
+
 ## Dependency list
 
 In order to keep track of every technology used and whether or not they eventually change their privacy policies, this section will cover every third-party dependency that this software uses:
@@ -44,15 +70,7 @@ The following section will cover a brief explanation of every technology listed 
 
 Flutter is an open source, application framework being used in order to generate the structure of the project. Even though for Developers it does have components that trigger telemetry and analytics by default, this isn't a risk for the user, since once packaged, it becomes part of a compiled artifact, and not a third-party service or running engine.
 
-For the user, Flutter does not:
-
-- initiate network traffic
-
-- run independently
-
-- update itself
-
-- collect telemetry at runtime
+For the user, Flutter cannot simply initiate any sort of connection or collect user data by default.
 
 If you are a contributing developer, please check the development and auditing manuals. But as a head start, we recommend disabling these as soon as you start using Dart and Flutter:
 
@@ -63,7 +81,7 @@ dart --disable-analytics
 
 #### Dart
 
-Dart is an open source, client-optimized programming language developed and stewarded by Google. Its core libraries are open source too. It's the primary language being used in the project, in order to easily maintain it as a cross-platform tool. 
+Dart is an open source, client-optimized programming language developed and stewarded by Google. Its core libraries are open source too. It's the primary language being used in the project, in order to easily maintain it as a cross-platform tool.
 
 Dart does not run as a background service, nor does it initiate network connections by default. It's not made in a way to emit network traffic independently of app code.
 
@@ -78,30 +96,26 @@ It lacks:
 - Daemon processes directly running in the background
 - The need of a connection with external servers
 
-And it's a good fit because:
-
-- Operates on local files only
-- Does not initiate network connections
-- Can be combined with encryption layers at the application or platform level
+And it's a good fit because it can be combined with encryption layers at the application or platform level.
 
 Being an embedded database engine technology makes it the perfect choice for this privacy-focused project.
 
 #### PostgreSQL
 
-PostgreSQL is a free and open source object-relational database system. This engine is used to store information. For this project, its purpose is to store tasks assigned in the self hosted, collaborative environment.
+PostgreSQL is an open source object-relational database system. This engine is used to store information. For this project, its purpose is to store tasks assigned in the self hosted, collaborative environment.
 
 PostgreSQL has no built-in telemetry, usage analytics, or "phone home" mechanisms by default. It is a passive listener tool, so it doesn't trigger network actions by itself, only listens for API calls. It's supposed to be executed with the provided docker configuration so that it avoids unexpected behavior. It will, however, save logs in the server in a way that gives the operator enough information about problems while running. Because it is a network-capable database, the privacy of its data depends on the server operator; by following good practices, the database should remain safe from intruders.
 
 #### Docker
 
-Docker is a Free and Open Source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is to facilitate deployment, by packaging the backend environment into reproducible containers to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
+Docker is an open source containerization tool which purpose is to allow for easy software deployment on any machine. In this case, Docker's purpose is to facilitate deployment, by packaging the backend environment into reproducible containers to facilitate database deployment for the task sharing and sync features of the app; it's meant to be used by operators.
 
 In the following project, Docker is only used for deploying the server image that the self-hosted server operator can later run on a machine for development or deployment.
 
 Vertal provides an official backend image configured to operate without telemetry or unsolicited outbound network traffic at the application level.
 
 
-Talking about the Docker engine itself (for contributors):
+Talking about the Docker engine itself (for operators):
 
 **The Docker Engine does not violate contributor privacy by default.
 Please note that the Docker engine IS NOT the same as Docker Desktop.**
@@ -142,7 +156,7 @@ This tradeoff is a deliberate design consideration, prioritizing privacy and dec
 
 ### Risks to avoid during development
 
-Flutter contains functions that invoke libraries from Google's official servers (google_fonts packages). Using these packages are a threat to our privacy model, since they require to automatically fetch the packages over the internet. In order to avoid this, all fonts will be manually curated, downloaded and packaged within the app in order to avoid the need to establish a connection with Google's servers. 
+Flutter contains functions that invoke libraries from Google's official servers (google_fonts packages). Using these packages are a threat to our privacy model, since they require to automatically fetch the packages over the internet. In order to avoid this, all fonts will be manually curated, downloaded and packaged within the app in order to avoid the need to establish a connection with Google's servers.
 
 ## Audit process
 
